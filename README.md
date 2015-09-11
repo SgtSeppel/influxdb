@@ -1,6 +1,16 @@
 # smarthome-influxdb
 Plugin to store data from smarthome.py in a InfluxDB i.e. for graphing with Grafana.
 
+
+## Dependencies
+At the moment I did not want to write the influxDB handling from scratch. Therefore the plugin uses the influxDB python client.
+You can install it with
+<pre>
+pip install influxdb
+</pre>
+
+pip is a known troublemaker in connection with smarthome.py. During my tests this lib did not lead to any problems.
+
 ## Configuration
 ### plugin.conf
 <pre>
