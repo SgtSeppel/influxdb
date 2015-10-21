@@ -9,7 +9,9 @@ You can install it with
 pip install influxdb
 </pre>
 
-pip is a known troublemaker in connection with smarthome.py. During my tests this lib did not lead to any problems.
+six is a known troublemaker in connection with smarthome.py. During my tests this lib did not lead to any problems.
+
+If you get error messages referring to six, dateutils and tz, then try installing them via <pre>apt-get install python-dateutil python3-tz</pre>
 
 ## Configuration
 ### plugin.conf
