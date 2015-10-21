@@ -39,11 +39,9 @@ class InfluxDB():
     self.client = None
     self._items = []
 
-    self.influx_keyword = 'sqlite'
-
     # connect to DB
     self.client = InfluxDBClient(self.influx_host, self.influx_port, self.influx_user, self.influx_pass, self.influx_db)
-    logger.warn("InfluxDBClient("+self.influx_host+", "+str(self.influx_port)+", "+self.influx_user+", "+self.influx_pass+", "+self.influx_db+")")
+    logger.debug("InfluxDBClient("+self.influx_host+", "+str(self.influx_port)+", "+self.influx_user+", "+self.influx_pass+", "+self.influx_db+")")
     # check if database already exists, if not - create it
     exists = False
     dbs = self.client.get_list_database()
@@ -52,10 +50,10 @@ class InfluxDB():
         exists = True
 
     if exists == False:
-      logger.warn('Database' + self.influx_db + ' does not exist, creating it.')
-      client.create_database( self.influx_db)
+      logger.debug('Database' + self.influx_db + ' does not exist, creating it.')
+      self.client.create_database( self.influx_db)
     else:
-      logger.warn('Database' + self.influx_db + ' exists')
+      logger.debug('Database' + self.influx_db + ' exists')
 
       
   def run(self):
@@ -68,7 +66,7 @@ class InfluxDB():
   def parse_item(self, item):
     if self.influx_keyword in item.conf:
       if item.type() not in ['num', 'bool']:
-        logger.warning("InfluxDB: only supports 'num' and 'bool' as types. Item: {} ".format(item.id()))
+        logger.debug("InfluxDB: only supports 'num' and 'bool' as types. Item: {} ".format(item.id()))
         return
       self._items.append(item)
       return self.update_item
